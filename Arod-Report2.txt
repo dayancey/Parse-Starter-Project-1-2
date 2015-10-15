@@ -1,0 +1,122 @@
+
+
+
+
+
+
+Waffle
+Team Arod
+Devin Yancey, Nicole Baine, Zach Hutchinson
+CSC 490-01
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Report 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Since we are creating a social media app, the first thing that we had to decide was which platform to create it for. Our choice was to make the app for Android devices. Specifically we’re creating this to run on Android 5.1, which is the latest version. We are going to use Android Studio as our IDE for developing our application. For the backend of our application, we will attempt to use Parse for handling our database. Parse allows us to implement a cloud database into our application. If we decide to allow the users to create accounts, it will allow them to sign in through a third party social network, such as Facebook. There will be numerous permissions that we will need for our app to work properly. First, we will need to access the internet so that we can connect to the database and allow the user to either view “choices” or create “choices” for others to view. The app will be location based, so we will also need access to the user's location through a permission. Finally, we will need access to the user's camera and photos so they are able to upload photos directly into the application. 
+Creating this application is feasible for our group due to our diverse background. As a team, we have taken Mobile Apps, Database Design, and multiple Java programming courses. All of these courses provide a solid foundation of knowledge that we need in order to make this application a reality. Along with this, we have practical knowledge of Android Studio, Java, and scripting languages. By choosing to use Parse in place of creating a database from scratch, time will be saved in implementation, along with a reduction in complexity. Using a pre-built database will allow us to avoid the difficulties of making Android Studio and a MySQL database interact properly. The nature of the application being a social media app also allows us to have flexibility in making the project more or less complex. This will allow us to remove a feature if we find the project is no longer feasible, or, in the converse situation, add features if we find ourselves completing tasks too quickly.
+Given the popularity of social media and mobile apps today, this project undertaking is interesting to our team because it will allow us to work with these popular means of social media entertainment and development. We have never built something as complex as a social media mobile app before and with the nature of social media today, as in keeping everything new, interesting, and efficient, we can continuously add difficulty and complexity to our project to make it as intricate as we see fit. This will give us plenty of room to shrink or expand our ideas for this mobile app. To continue, we plan on using Parse for our data handling which is something that we have never before used or know a lot about, and our limited experience with Android development will make this an interesting and educational project that may help us in the future. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Report 2
+
+
+
+
+
+
+Abstract
+	Waffling is a term used when one is in a tough decision making process. Waffle is our social mobile application project that is going to be created for Android devices. This will allow users to socially interact based on individual decisions that they may encount in “every-day” life. Implementing our combined knowledge of Parse, Android Studio, Java, and other languages and environments, our goal is to create this app. for all types of potential users with an easy to learn/use user interface and an elegant yet simple design. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Data Dictionary
+The following terms will be used for all data flow diagrams. Please refer to this page for any questions regarding names used.
+Login_info- contains the following information for a user: username, password
+username- the user’s identifier; allows the system to display the proper info
+password- the user’s verification; allows the user access to the system
+Sign_up_info-  contains the following information for a user: username, password, email
+email- the user’s identifier; allows system to contact user regarding account changes
+Image_info- contains the following information for an image: image, vote_count, username
+image- picture object that is stored in database as either .png or jpg file.
+vote_count- An incremental counter 
+timestamp- stores what time the image was uploaded
+comment- message uploaded with image that defines the purpose of the post
+Confirmation- flag passed notifying system that action was successful
+User_Info- contains the following information for a user’s profile: username, 
+password, email, follower_info, profile_picture, followee_info
+follower_info- List of usernames of the profiles that the user is following
+followee_info-List of usernames of the profiles that are following the user
+profile_picture- image attached to username
+
+Data Flow
+
