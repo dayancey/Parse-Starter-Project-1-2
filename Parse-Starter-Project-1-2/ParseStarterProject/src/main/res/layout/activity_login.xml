@@ -31,5 +31,6 @@
         android:text="loginUser"
         android:id="@+id/loginUserBtt"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        />
 </RelativeLayout>

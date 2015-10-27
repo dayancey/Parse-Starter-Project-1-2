@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<navigationModel
+  ns = "http://schemas.android.com?import=com.android.tools.idea.editors.navigation.model.*">
+  <locations  
+    class = "java.util.ArrayList">
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.parse.starter.WelcomeActivity"/>
+      <point      
+        x = "2016"      
+        y = "20"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.parse.starter.LoginActivity"/>
+      <point      
+        x = "168"      
+        y = "252"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.parse.starter.MainActivity"/>
+      <point      
+        x = "732"      
+        y = "212"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.parse.starter.SignUpActivity"/>
+      <point      
+        x = "508"      
+        y = "28"/>
+    </statePointEntry>
+  </locations>
+</navigationModel>

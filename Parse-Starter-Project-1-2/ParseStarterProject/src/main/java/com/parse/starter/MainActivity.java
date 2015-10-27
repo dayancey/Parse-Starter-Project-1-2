@@ -8,29 +8,43 @@
  */
 package com.parse.starter;
 
-import android.graphics.drawable.Drawable;
-import android.media.Image;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.parse.LogInCallback;
+import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
-import com.parse.ParseFile;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SignUpCallback;
 
-import java.io.Serializable;
-import java.text.ParseException;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
   TextView un;
+  ListView lv;
+  List<ParseObject> ob;
+  ArrayAdapter<String> adapter;
+  ProgressDialog mProgressDialog;
+  ParseQuery<ParseObject> query;
+  ArrayList<String> list;
+  TextView txt;
+  ProgressDialog pd;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -38,30 +52,137 @@ public class MainActivity extends ActionBarActivity {
     un = (TextView) findViewById(R.id.mainUserId);
     un.setText(getIntent().getSerializableExtra("userName").toString().trim());
 
+    list = new ArrayList<>();
+    query = new ParseQuery<>("sampleObject");
+    //query = ParseQuery.getQuery("Post");
+
+    txt = (TextView) findViewById(R.id.textView3);
+    //arrayAdapter = new ArrayAdapter<Device>(this, android.R.layout.simple_list_item_1, deviceList);
+    adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+
+    lv = (ListView) findViewById(R.id.listView);
+
+    pd = new ProgressDialog(MainActivity.this);
+
+    ParseUser user = new ParseUser();
 
     Post post = new Post();
-    post.userName = "dave";
-    ParseObject upload = new ParseObject("uploadTest");
-    //upload.put("post1", post);
+    post.setOwner(user.getCurrentUser());
+    post.setDisplayName(user.getCurrentUser().getUsername());
+    post.setVote1(2);
 
-    //upload.saveInBackground();
-    //ParseFile file = new ParseFile();
+
+
     /**
-    check for which user is logged in?
-    based off who is logged in talior the system preferences to that user?
+    ParseObject upload = new ParseObject("sampleObject");
 
-    this is where we want to display the main activity
-    what is it going to look like?
+    upload.put("postTest", post);
+    upload.put("num", 4);
 
-     show the a list of the users "choices" to be selected upon?
+    upload.saveInBackground();
+     **/
 
-     Better yet show options to go to the users "choices" and go to "choices"
-     that they can "pick" on
-        1st option: starts UserChoicesActivity
-        2nd option: starts PickActivity
+
+
+    //post.saveInBackground();
+
+
+
+
+
+    /**
+      query.whereExists("displayName");
+
+
+      query.findInBackground(new FindCallback<ParseObject>() {
+        @Override
+        public void done(List<ParseObject> objects, ParseException e) {
+          if (e == null) {
+            //int size = objects.size();
+            Log.d("Here", "here");
+
+            for (int i = 0; i < objects.size(); i++) {
+              Log.d("Adding to the list", "next");
+              if (list.add(objects.get(i).toString())) {
+                Log.d("Adding to the list", "success");
+                //txt.setText(objects.get(i).toString());
+                //getPost(objects.get(i).get("post2").toString());
+
+                Log.d("Setting Text", "Text Hopefully Set");
+                //Post post1 = (Post) objects.get(i);
+                //txt.setText(post1.getVoteForimg1() + "");
+
+              } else {
+                Log.d("Adding to the object", "false");
+              }
+            }
+          }
+        }
+      });
+
     **/
 
-    ParseAnalytics.trackAppOpenedInBackground(getIntent());
+    ParseQuery<ParseObject> query1 = new ParseQuery<ParseObject>("sampleObject");
+    //query1.whereEqualTo("voteImage1", 2);
+    query1.findInBackground(new FindCallback<ParseObject>() {
+      @Override
+      public void done(List<ParseObject> objects, ParseException e) {
+
+        if (e == null) {
+          Log.d("Query Search", "Successful");
+          for (int i = 0; i < objects.size(); i++){
+            list.add(objects.get(i).toString());
+            Log.d("adding to list", objects.get(i).toString());
+
+          }
+
+
+          adapter.clear();
+          if (list.size() == 0){
+            Log.d("List size is not ", "zero");
+          }
+
+          
+
+          lv.setAdapter(adapter);
+
+        } else {
+          Log.d("Query search", "Unsuccessful");
+        }
+      }
+    });
+              // ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_main );
+
+              //lv.setAdapter(arrayAdapter);
+
+              ParseAnalytics.trackAppOpenedInBackground(getIntent());
+  }
+
+  public void addToListArray(List<ParseObject> lst){
+    list.clear();
+    for (int i = 0; i < lst.size(); i++){
+
+      list.add(lst.get(i).toString());
+      Log.d("Adding to Array list", "Added " + i +" "+lst.get(i).getString("objectId"));
+    }
+    txt.setText("Here");
+  }
+
+
+  public void getPosts(){
+    adapter.clear();
+
+    Log.d("Clearing Adapter", "Success");
+    for (int i = 0; i < list.size(); i++) {
+      Log.d("Adding to adapter", "success");
+      adapter.add(list.get(i).toString());
+
+    }
+    adapter.notifyDataSetChanged();
+
+    lv.setAdapter(adapter);
+
+    //pd.dismiss();
   }
 
   @Override

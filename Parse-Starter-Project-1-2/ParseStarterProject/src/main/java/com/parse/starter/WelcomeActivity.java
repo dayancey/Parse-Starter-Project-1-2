@@ -69,7 +69,7 @@ public class WelcomeActivity extends ActionBarActivity {
             startActivity(intent);
             finish();
         } else {
-            Log.d("noCurrentUser", "There is no current user and we start welcomActivity");
+            Log.d("noCurrentUser", "There is no current user and we start welcomeActivity");
             // show the signup or login screen
             //Intent intent2 = new Intent(WelcomeActivity.this, MainActivity.class);
             //startActivity(intent2);
