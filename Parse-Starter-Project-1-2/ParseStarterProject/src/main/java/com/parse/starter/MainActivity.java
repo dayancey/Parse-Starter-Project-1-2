@@ -8,18 +8,23 @@
  */
 package com.parse.starter;
 
+import android.annotation.TargetApi;
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.Parse;
+import com.parse.ParseACL;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -36,15 +41,18 @@ import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
   TextView un;
-  ListView lv;
+  AbsListView lv;
+
   List<ParseObject> ob;
   ArrayAdapter<String> adapter;
+  ListAdapter listAdapter;
   ProgressDialog mProgressDialog;
   ParseQuery<ParseObject> query;
   ArrayList<String> list;
   TextView txt;
   ProgressDialog pd;
 
+  @TargetApi(Build.VERSION_CODES.HONEYCOMB)
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -53,15 +61,18 @@ public class MainActivity extends ActionBarActivity {
     un.setText(getIntent().getSerializableExtra("userName").toString().trim());
 
     list = new ArrayList<>();
-    query = new ParseQuery<>("sampleObject");
+    query = new ParseQuery<>("Post");
     //query = ParseQuery.getQuery("Post");
-
+    Post test = new Post();
+    Post test1 = new Post();
+    Post[] arrayOfPost = {test, test1};
     txt = (TextView) findViewById(R.id.textView3);
     //arrayAdapter = new ArrayAdapter<Device>(this, android.R.layout.simple_list_item_1, deviceList);
     adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
 
-    lv = (ListView) findViewById(R.id.listView);
-
+    listAdapter = new CustomAdapter(this, arrayOfPost);
+    lv = (AbsListView) findViewById(R.id.postListView);
+    lv.setAdapter(listAdapter);
     pd = new ProgressDialog(MainActivity.this);
 
     ParseUser user = new ParseUser();
@@ -70,7 +81,13 @@ public class MainActivity extends ActionBarActivity {
     post.setOwner(user.getCurrentUser());
     post.setDisplayName(user.getCurrentUser().getUsername());
     post.setVote1(2);
+    ParseACL acl = new ParseACL();
+    acl.setPublicReadAccess(true);
+    acl.setPublicWriteAccess(true);
 
+    post.setACL(acl);
+    //post.saveInBackground();
+    
 
 
     /**
@@ -90,67 +107,36 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-    /**
-      query.whereExists("displayName");
+
+      //query.whereExists("voteImage1");
+      query.whereEqualTo("objectId", "OSDWgkbkVy");
 
 
       query.findInBackground(new FindCallback<ParseObject>() {
         @Override
         public void done(List<ParseObject> objects, ParseException e) {
           if (e == null) {
-            //int size = objects.size();
-            Log.d("Here", "here");
 
+            Log.d("object size:", objects.size() + "");
             for (int i = 0; i < objects.size(); i++) {
-              Log.d("Adding to the list", "next");
-              if (list.add(objects.get(i).toString())) {
-                Log.d("Adding to the list", "success");
-                //txt.setText(objects.get(i).toString());
-                //getPost(objects.get(i).get("post2").toString());
-
-                Log.d("Setting Text", "Text Hopefully Set");
-                //Post post1 = (Post) objects.get(i);
-                //txt.setText(post1.getVoteForimg1() + "");
-
-              } else {
-                Log.d("Adding to the object", "false");
-              }
+              Log.d("Object:", objects.get(i).toString());
+              String s = (String) objects.get(i).getString("voteImage1");
+              txt.setText(s);
             }
+          } else {
+
           }
+
         }
+
+
       });
 
-    **/
-
-    ParseQuery<ParseObject> query1 = new ParseQuery<ParseObject>("sampleObject");
-    //query1.whereEqualTo("voteImage1", 2);
-    query1.findInBackground(new FindCallback<ParseObject>() {
-      @Override
-      public void done(List<ParseObject> objects, ParseException e) {
-
-        if (e == null) {
-          Log.d("Query Search", "Successful");
-          for (int i = 0; i < objects.size(); i++){
-            list.add(objects.get(i).toString());
-            Log.d("adding to list", objects.get(i).toString());
-
-          }
 
 
-          adapter.clear();
-          if (list.size() == 0){
-            Log.d("List size is not ", "zero");
-          }
 
-          
 
-          lv.setAdapter(adapter);
 
-        } else {
-          Log.d("Query search", "Unsuccessful");
-        }
-      }
-    });
               // ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_main );
 
               //lv.setAdapter(arrayAdapter);

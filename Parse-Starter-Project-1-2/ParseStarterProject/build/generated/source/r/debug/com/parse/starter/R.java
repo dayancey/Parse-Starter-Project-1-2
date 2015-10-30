@@ -1542,7 +1542,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0c003d;
         public static final int action_mode_bar_stub=0x7f0c003c;
         public static final int action_mode_close_button=0x7f0c0025;
-        public static final int action_settings=0x7f0c0073;
+        public static final int action_settings=0x7f0c0077;
         public static final int activity_chooser_view_content=0x7f0c0026;
         public static final int alertTitle=0x7f0c0030;
         public static final int always=0x7f0c0016;
@@ -1572,15 +1572,14 @@ containing a value of this type.
         public static final int icon=0x7f0c002b;
         public static final int ifRoom=0x7f0c0018;
         public static final int image=0x7f0c0028;
-        public static final int imageButton=0x7f0c006f;
-        public static final int imageButton2=0x7f0c0070;
         public static final int imageView=0x7f0c0054;
+        public static final int imageVote1=0x7f0c0071;
+        public static final int imageVote2=0x7f0c0072;
         public static final int info=0x7f0c006d;
         public static final int line1=0x7f0c0067;
         public static final int line3=0x7f0c006b;
         public static final int linearLayout=0x7f0c0052;
         public static final int listMode=0x7f0c0009;
-        public static final int listView=0x7f0c0055;
         public static final int list_item=0x7f0c002a;
         public static final int loginBtt=0x7f0c005d;
         public static final int loginUserBtt=0x7f0c0051;
@@ -1596,6 +1595,7 @@ containing a value of this type.
         public static final int passwordEdt=0x7f0c0050;
         public static final int passwordSignupEdt=0x7f0c005a;
         public static final int password_again_edit_text=0x7f0c005b;
+        public static final int postListView=0x7f0c0056;
         public static final int progress_circular=0x7f0c0005;
         public static final int progress_horizontal=0x7f0c0006;
         public static final int radio=0x7f0c003a;
@@ -1629,18 +1629,22 @@ containing a value of this type.
         public static final int text2=0x7f0c006a;
         public static final int textSpacerNoButtons=0x7f0c0033;
         public static final int textView=0x7f0c0058;
-        public static final int textView2=0x7f0c0071;
-        public static final int textView3=0x7f0c0056;
-        public static final int textView4=0x7f0c0072;
+        public static final int textView3=0x7f0c0055;
         public static final int time=0x7f0c0068;
         public static final int title=0x7f0c002c;
         public static final int title_template=0x7f0c002f;
         public static final int topPanel=0x7f0c002e;
         public static final int up=0x7f0c0008;
         public static final int useLogo=0x7f0c0012;
+        public static final int userDescription=0x7f0c0076;
         public static final int userName=0x7f0c005f;
+        public static final int userName2=0x7f0c0070;
+        public static final int userName3=0x7f0c0075;
         public static final int userNameEdt=0x7f0c004f;
+        public static final int userPicture=0x7f0c006f;
         public static final int usernameSignupEdt=0x7f0c0057;
+        public static final int voteNumber1=0x7f0c0073;
+        public static final int voteNumber2=0x7f0c0074;
         public static final int withText=0x7f0c001a;
         public static final int wrap_content=0x7f0c001d;
     }
@@ -1705,6 +1709,7 @@ containing a value of this type.
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;
+        public static final int steph=0x7f030001;
     }
     public static final class string {
         public static final int abc_action_bar_home_description=0x7f060000;
