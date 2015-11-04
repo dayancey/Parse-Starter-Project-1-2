@@ -10,6 +10,10 @@ package com.parse.starter;
 
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -18,15 +22,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
+import com.parse.GetDataCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -41,17 +48,24 @@ import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
   TextView un;
-  AbsListView lv;
+  ListView lv;
 
   List<ParseObject> ob;
   ArrayAdapter<String> adapter;
   ListAdapter listAdapter;
   ProgressDialog mProgressDialog;
   ParseQuery<ParseObject> query;
-  ArrayList<String> list;
+  ArrayList<Post> list;
   TextView txt;
   ProgressDialog pd;
+  ParseFile file;
 
+  ImageView img;
+
+  String[] objectIds;
+
+  public Post test;
+  int arraySize;
   @TargetApi(Build.VERSION_CODES.HONEYCOMB)
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -59,28 +73,79 @@ public class MainActivity extends ActionBarActivity {
     setContentView(R.layout.activity_main);
     un = (TextView) findViewById(R.id.mainUserId);
     un.setText(getIntent().getSerializableExtra("userName").toString().trim());
+    objectIds = null;
 
-    list = new ArrayList<>();
     query = new ParseQuery<>("Post");
-    //query = ParseQuery.getQuery("Post");
-    Post test = new Post();
-    Post test1 = new Post();
-    Post[] arrayOfPost = {test, test1};
-    txt = (TextView) findViewById(R.id.textView3);
-    //arrayAdapter = new ArrayAdapter<Device>(this, android.R.layout.simple_list_item_1, deviceList);
-    adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+    list = new ArrayList<>();
 
-    listAdapter = new CustomAdapter(this, arrayOfPost);
-    lv = (AbsListView) findViewById(R.id.postListView);
-    lv.setAdapter(listAdapter);
+    //query = ParseQuery.getQuery("Post");
+    test = new Post();
+    Post test1 = new Post();
+
+    txt = (TextView) findViewById(R.id.textView3);
+
+    //adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+
+    lv = (ListView) findViewById(R.id.postListView);
+
     pd = new ProgressDialog(MainActivity.this);
+
+
+    ///////////////////////////////////////////
+
+    query.whereEqualTo("displayName", "test");
+
+
+    query.findInBackground(new FindCallback<ParseObject>() {
+
+      @Override
+      public void done(final List<ParseObject> objects, ParseException e) {
+        Log.d("antone", "test");
+        Log.d("Testing", "123");
+        objectIds = new String[objects.size()];
+        String[] ids = new String[objects.size()];
+        if (e == null) {
+
+          Log.d("object size:", objects.size() + "");
+
+          for (int i = 0; i < objects.size(); i++) {
+            Log.d("Object:", objects.get(i).toString());
+
+
+            objectIds[i] = objects.get(i).getObjectId().toString();
+            ids[i] = objects.get(i).getObjectId().toString();
+
+            ParseObject parseObject = objects.get(i);
+            test.setUserName(objects.get(i) + "");
+            txt.setText(test.getUserName());
+          }
+          sendToAdpater(ids);
+
+          lv.setAdapter(listAdapter);
+        } else {
+
+        }
+      }
+    });
+
+    //listAdapter = new CustomAdapter(this, test);
+    ////////////////////////////////////////////
+
+
+
+
+
 
     ParseUser user = new ParseUser();
 
+
+    //makePost();
     Post post = new Post();
     post.setOwner(user.getCurrentUser());
+    post.setUserName(user.getCurrentUser().toString());
     post.setDisplayName(user.getCurrentUser().getUsername());
     post.setVote1(2);
+//    post.put("Image1", file);
     ParseACL acl = new ParseACL();
     acl.setPublicReadAccess(true);
     acl.setPublicWriteAccess(true);
@@ -109,28 +174,14 @@ public class MainActivity extends ActionBarActivity {
 
 
       //query.whereExists("voteImage1");
-      query.whereEqualTo("objectId", "OSDWgkbkVy");
+
+    //Post[] arrayOfPost = {test1};
 
 
-      query.findInBackground(new FindCallback<ParseObject>() {
-        @Override
-        public void done(List<ParseObject> objects, ParseException e) {
-          if (e == null) {
-
-            Log.d("object size:", objects.size() + "");
-            for (int i = 0; i < objects.size(); i++) {
-              Log.d("Object:", objects.get(i).toString());
-              String s = (String) objects.get(i).getString("voteImage1");
-              txt.setText(s);
-            }
-          } else {
-
-          }
-
-        }
+    //lv.setAdapter(listAdapter);
 
 
-      });
+
 
 
 
@@ -144,14 +195,37 @@ public class MainActivity extends ActionBarActivity {
               ParseAnalytics.trackAppOpenedInBackground(getIntent());
   }
 
+  public void sendToAdpater(String[] array){
+
+    listAdapter = new CustomAdapter(this, array);
+
+  }
+
   public void addToListArray(List<ParseObject> lst){
     list.clear();
     for (int i = 0; i < lst.size(); i++){
 
-      list.add(lst.get(i).toString());
-      Log.d("Adding to Array list", "Added " + i +" "+lst.get(i).getString("objectId"));
+      list.add((Post) lst.get(i));
+      Log.d("Adding to Array list", "Added " + i +" "+((Post) lst.get(i)).getUserName());
     }
     txt.setText("Here");
+  }
+
+  public void makePost(){
+    //THis is to locate the image but it will be replaced by going into the
+    //gallery/taking a picture
+    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable
+            .user_icon);
+
+    //Convert it to byte
+    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+    //compress the image
+    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+    byte[] image = stream.toByteArray();
+
+    //create the parse file
+    file = new ParseFile("postImage.png", image);
+    file.saveInBackground();
   }
 
 

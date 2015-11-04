@@ -1,5 +1,6 @@
 package com.parse.starter;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 
@@ -15,7 +16,8 @@ import com.parse.ParseUser;
 @ParseClassName("Post")
 
 public class Post extends ParseObject{
-    Image userImage, img1, img2;
+    Bitmap userImage, img2;
+    Bitmap img1;
     int voteForimg1, voteForimg2;
     String userName;
     String userComment;
@@ -24,7 +26,7 @@ public class Post extends ParseObject{
 
     }
 
-    public Post(Image user, Image img1, Image img2, int voteForimg1,
+    public Post(Bitmap user, Bitmap img1, Bitmap img2, int voteForimg1,
                      int voteForimg2, String userName, String userComment){
         this.userImage = user;
         this.img1 = img1;
@@ -36,7 +38,7 @@ public class Post extends ParseObject{
 
     }
 
-    public void setImages(Image image, Image image2){
+    public void setImages(Bitmap image, Bitmap image2){
         img1 = image;
         img2 = image2;
     }
@@ -45,11 +47,11 @@ public class Post extends ParseObject{
         voteForimg1 += 1;
     }
 
-    public Image getImg1() {
+    public Bitmap getImg1() {
         return img1;
     }
 
-    public Image getImg2() {
+    public Bitmap getImg2() {
         return img2;
     }
 
@@ -59,6 +61,10 @@ public class Post extends ParseObject{
 
     public String getUserName() {
         return userName;
+    }
+
+    public void setUserName(String userName){
+        this.userName = userName;
     }
 
 
