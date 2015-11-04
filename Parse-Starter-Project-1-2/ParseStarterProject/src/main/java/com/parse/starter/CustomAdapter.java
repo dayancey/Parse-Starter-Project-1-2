@@ -57,7 +57,7 @@ class CustomAdapter extends ArrayAdapter<String> {
 
         final ImageView image1 = (ImageView) customView.findViewById(R.id.imageVote1);
         final ImageView image2 = (ImageView) customView.findViewById(R.id.imageVote2);
-
+//
 
 
 
