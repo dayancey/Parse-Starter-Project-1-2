@@ -6,6 +6,7 @@ import android.media.Image;
 
 import com.parse.ParseACL;
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -17,7 +18,7 @@ import com.parse.ParseUser;
 
 public class Post extends ParseObject{
     Bitmap userImage, img2;
-    Bitmap img1;
+    byte[] img1;
     int voteForimg1, voteForimg2;
     String userName;
     String userComment;
@@ -29,7 +30,7 @@ public class Post extends ParseObject{
     public Post(Bitmap user, Bitmap img1, Bitmap img2, int voteForimg1,
                      int voteForimg2, String userName, String userComment){
         this.userImage = user;
-        this.img1 = img1;
+
         this.img2 = img2;
         this.voteForimg1 = voteForimg1;
         this.voteForimg2 = voteForimg2;
@@ -39,15 +40,21 @@ public class Post extends ParseObject{
     }
 
     public void setImages(Bitmap image, Bitmap image2){
-        img1 = image;
+
         img2 = image2;
     }
+
+    public void setImg1(byte[] image){
+        put("imageTest", image);
+        img1 = image;
+    }
+
 
     public void updateVoteForimg1(){
         voteForimg1 += 1;
     }
 
-    public Bitmap getImg1() {
+    public byte[] getImg1() {
         return img1;
     }
 

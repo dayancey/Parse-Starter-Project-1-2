@@ -64,6 +64,10 @@ public class MainActivity extends ActionBarActivity {
 
   String[] objectIds;
 
+  Post[] objectPosts;
+
+  byte[] image;
+
   public Post test;
   int arraySize;
   @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -74,6 +78,7 @@ public class MainActivity extends ActionBarActivity {
     un = (TextView) findViewById(R.id.mainUserId);
     un.setText(getIntent().getSerializableExtra("userName").toString().trim());
     objectIds = null;
+    objectPosts = null;
 
     query = new ParseQuery<>("Post");
     list = new ArrayList<>();
@@ -90,12 +95,10 @@ public class MainActivity extends ActionBarActivity {
 
     pd = new ProgressDialog(MainActivity.this);
 
-
+/**
     ///////////////////////////////////////////
 
     query.whereEqualTo("displayName", "test");
-
-
     query.findInBackground(new FindCallback<ParseObject>() {
 
       @Override
@@ -130,7 +133,24 @@ public class MainActivity extends ActionBarActivity {
 
     //listAdapter = new CustomAdapter(this, test);
     ////////////////////////////////////////////
+**/
 
+    //query.whereEqualTo("displayName", "test");
+    query.findInBackground(new FindCallback<ParseObject>() {
+      @Override
+      public void done(List<ParseObject> objects, ParseException e) {
+        if (e == null){
+          Log.d("number of objects", objects.size() +"");
+          Post[] pst = new Post[objects.size()];
+          for (int i = 0; i < objects.size(); i++){
+            Log.d("ParseObject:", objects.get(i).toString());
+            pst[i] = (Post) objects.get(i);
+          }
+          sendToAdpater(pst);
+          lv.setAdapter(listAdapter);
+        }
+      }
+    });
 
 
 
@@ -139,66 +159,36 @@ public class MainActivity extends ActionBarActivity {
     ParseUser user = new ParseUser();
 
 
-    //makePost();
+    makePost();
     Post post = new Post();
     post.setOwner(user.getCurrentUser());
     post.setUserName(user.getCurrentUser().toString());
     post.setDisplayName(user.getCurrentUser().getUsername());
     post.setVote1(2);
+    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable
+            .user_icon);
+    post.setImg1(image);
 //    post.put("Image1", file);
     ParseACL acl = new ParseACL();
     acl.setPublicReadAccess(true);
     acl.setPublicWriteAccess(true);
 
     post.setACL(acl);
-    //post.saveInBackground();
-    
+    post.saveInBackground();
 
-
-    /**
-    ParseObject upload = new ParseObject("sampleObject");
-
-    upload.put("postTest", post);
-    upload.put("num", 4);
-
-    upload.saveInBackground();
-     **/
-
-
-
-    //post.saveInBackground();
-
-
-
-
-
-
-      //query.whereExists("voteImage1");
-
-    //Post[] arrayOfPost = {test1};
-
-
-    //lv.setAdapter(listAdapter);
-
-
-
-
-
-
-
-
-
-              // ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_main );
-
-              //lv.setAdapter(arrayAdapter);
 
               ParseAnalytics.trackAppOpenedInBackground(getIntent());
   }
 
-  public void sendToAdpater(String[] array){
+  public void sendToAdpater(Post[] array){
 
+    pd = ProgressDialog.show(this, "dialog title",
+            "dialog message", true);
+    for (int i = 0; i < array.length; i++){
+      Log.d("Object:", array[i].toString());
+    }
     listAdapter = new CustomAdapter(this, array);
-
+    pd.dismiss();
   }
 
   public void addToListArray(List<ParseObject> lst){
@@ -221,11 +211,11 @@ public class MainActivity extends ActionBarActivity {
     ByteArrayOutputStream stream = new ByteArrayOutputStream();
     //compress the image
     bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-    byte[] image = stream.toByteArray();
-
+    byte[] image2 = stream.toByteArray();
+    image = image2;
     //create the parse file
-    file = new ParseFile("postImage.png", image);
-    file.saveInBackground();
+    //file = new ParseFile("postImage.png", image);
+    //file.saveInBackground();
   }
 
 
