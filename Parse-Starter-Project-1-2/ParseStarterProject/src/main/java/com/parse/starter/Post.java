@@ -94,8 +94,8 @@ public class Post extends ParseObject{
         put("voteImage1", voteForimg1);
     }
 
-    public void putImage(Image img){
-        put("Image", img);
+    public void putImage(ParseFile file){
+        put("Image", file);
     }
 
     public int getVote(){

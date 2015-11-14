@@ -1523,8 +1523,10 @@ containing a value of this type.
         public static final int abc_textfield_search_activated_mtrl_alpha=0x7f020038;
         public static final int abc_textfield_search_default_mtrl_alpha=0x7f020039;
         public static final int abc_textfield_search_material=0x7f02003a;
-        public static final int notification_template_icon_bg=0x7f02003c;
-        public static final int user_icon=0x7f02003b;
+        public static final int background=0x7f02003b;
+        public static final int notification_template_icon_bg=0x7f02003e;
+        public static final int roundedrectangle=0x7f02003c;
+        public static final int user_icon=0x7f02003d;
     }
     public static final class id {
         public static final int action0=0x7f0c0063;
@@ -1581,7 +1583,7 @@ containing a value of this type.
         public static final int linearLayout=0x7f0c0052;
         public static final int listMode=0x7f0c0009;
         public static final int list_item=0x7f0c002a;
-        public static final int loginBtt=0x7f0c005e;
+        public static final int loginBtt=0x7f0c0060;
         public static final int loginUserBtt=0x7f0c0051;
         public static final int mainUserId=0x7f0c0053;
         public static final int media_actions=0x7f0c0066;
@@ -1591,7 +1593,7 @@ containing a value of this type.
         public static final int none=0x7f0c000e;
         public static final int normal=0x7f0c000a;
         public static final int parentPanel=0x7f0c002d;
-        public static final int password=0x7f0c0061;
+        public static final int password=0x7f0c005f;
         public static final int passwordEdt=0x7f0c0050;
         public static final int passwordSignupEdt=0x7f0c005b;
         public static final int password_again_edit_text=0x7f0c005c;
@@ -1616,7 +1618,7 @@ containing a value of this type.
         public static final int showCustom=0x7f0c000f;
         public static final int showHome=0x7f0c0010;
         public static final int showTitle=0x7f0c0011;
-        public static final int signUpBttn=0x7f0c005f;
+        public static final int signUpBttn=0x7f0c0061;
         public static final int signupBtt=0x7f0c005a;
         public static final int split_action_bar=0x7f0c0007;
         public static final int src_atop=0x7f0c0020;
@@ -1638,7 +1640,7 @@ containing a value of this type.
         public static final int up=0x7f0c0008;
         public static final int useLogo=0x7f0c0012;
         public static final int userDescription=0x7f0c0077;
-        public static final int userName=0x7f0c0060;
+        public static final int userName=0x7f0c005e;
         public static final int userName2=0x7f0c0071;
         public static final int userName3=0x7f0c0076;
         public static final int userNameEdt=0x7f0c004f;
