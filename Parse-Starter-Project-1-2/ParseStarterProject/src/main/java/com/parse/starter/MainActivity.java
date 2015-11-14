@@ -167,14 +167,15 @@ public class MainActivity extends ActionBarActivity {
     post.setVote1(2);
     Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable
             .user_icon);
+
     post.setImg1(image);
-//    post.put("Image1", file);
+    //post.put("Image1", file);
     ParseACL acl = new ParseACL();
     acl.setPublicReadAccess(true);
     acl.setPublicWriteAccess(true);
 
     post.setACL(acl);
-    post.saveInBackground();
+    //post.saveInBackground();
 
 
               ParseAnalytics.trackAppOpenedInBackground(getIntent());
@@ -210,7 +211,7 @@ public class MainActivity extends ActionBarActivity {
     //Convert it to byte
     ByteArrayOutputStream stream = new ByteArrayOutputStream();
     //compress the image
-    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+    bitmap.compress(Bitmap.CompressFormat.PNG, 50, stream);
     byte[] image2 = stream.toByteArray();
     image = image2;
     //create the parse file

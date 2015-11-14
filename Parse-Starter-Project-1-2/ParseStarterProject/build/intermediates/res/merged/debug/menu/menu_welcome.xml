@@ -4,5 +4,6 @@
     tools:context="com.parse.starter.WelcomeActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
+
 </menu>
 <!-- From: file:/Users/devinyancey/Desktop/Senior%20Project/Parse-Starter-Project-1-2/ParseStarterProject/src/main/res/menu/menu_welcome.xml -->

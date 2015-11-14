@@ -6,12 +6,33 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.parse.starter.WelcomeActivity"
-    android:background="@drawable/background">
+    android:background="@drawable/bckg"
+    >
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:id="@+id/imageView2"
+                android:background="@drawable/waffle"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="-30dp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="140dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -20,46 +41,62 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Social Picker"
-                android:id="@+id/textView"
-                android:textSize="45dp"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true" />
-        </RelativeLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="120dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Username"
+                android:id="@+id/textView2" />
 
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
                 android:id="@+id/userName"
 
-                android:hint="username"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:background="@drawable/roundedrectangle"
-                />
+                android:layout_marginTop="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:id="@+id/textView4"
+                android:layout_above="@+id/password"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
                 android:id="@+id/password"
-                android:hint="password"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:background="@drawable/roundedrectangle"
                 />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/imageView3"
+                android:src="@drawable/lock"
+                android:layout_marginBottom="12dp"
+                android:layout_alignBottom="@+id/password"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="25dp"
+                android:layout_marginEnd="25dp" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/imageView4"
+                android:src="@drawable/usernmpic"
+                android:layout_marginTop="12dp"
+                android:layout_alignTop="@+id/userName"
+                android:layout_alignLeft="@+id/imageView3"
+                android:layout_alignStart="@+id/imageView3" />
+
         </RelativeLayout>
     </LinearLayout>
 
@@ -75,23 +112,23 @@
             <Button
                 android:layout_width="155dp"
                 android:layout_height="65dp"
-                android:text="Login"
                 android:id="@+id/loginBtt"
                 android:textSize="25dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="101dp" />
+                android:layout_marginBottom="101dp"
+                android:background="@drawable/login"/>
 
             <Button
                 android:layout_width="155dp"
                 android:layout_height="65dp"
-                android:text="Sign Up"
                 android:id="@+id/signUpBttn"
                 android:textSize="25dp"
                 android:layout_alignTop="@+id/loginBtt"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/signupbtt"/>
 
             <TextView
                 android:layout_width="wrap_content"

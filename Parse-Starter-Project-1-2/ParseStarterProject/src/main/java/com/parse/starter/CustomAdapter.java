@@ -29,7 +29,7 @@ import java.util.List;
 class CustomAdapter extends ArrayAdapter<Post> {
     String[] posted;
     //ParseObject post = new ParseObject("");
-
+    Bitmap bitmap;
 
     CustomAdapter(Context context, Post[] posts){
         super(context, R.layout.the_post_layouts, posts);
@@ -68,10 +68,13 @@ class CustomAdapter extends ArrayAdapter<Post> {
         userName.setText(post.getString("displayName"));
             byte[] arr = (byte[]) post.get("imageTest");
             if (arr != null) {
-                Bitmap bitmap = BitmapFactory.decodeByteArray(arr, 0, arr.length);
+                bitmap = BitmapFactory.decodeByteArray(arr, 0, arr.length);
+
                 image1.setImageBitmap(bitmap);
+
             }
         Log.d("DisplayName:", post.getString("displayName"));
+
         /**
         query.whereEqualTo("objectId", post);
         query.getFirstInBackground(new GetCallback<ParseObject>() {
@@ -109,6 +112,7 @@ class CustomAdapter extends ArrayAdapter<Post> {
         //image1.setImageResource();
         //image2.setImageResource(R.mipmap.steph);
         //userImage.setImageResource(R.mipmap.steph);
+
         }
         return customView;
     }
