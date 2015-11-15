@@ -45,13 +45,12 @@ public class Post extends ParseObject implements Serializable{
 
 
 
-    public void setImg1(byte[] image){
-        put("imageTest", image);
-        img1 = image;
+    public void setImg1(ParseFile image){
+        put("leftImage", image);
     }
 
-    public void setImg2(byte[] image){
-        put("imageTest2", image);
+    public void setImg2(ParseFile image){
+        put("rightImage", image);
     }
 
     public void setImg3(byte[] image){
