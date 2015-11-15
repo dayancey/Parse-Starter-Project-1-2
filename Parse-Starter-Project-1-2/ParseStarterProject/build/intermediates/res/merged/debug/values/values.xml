@@ -21,7 +21,7 @@
     <color name="accent_material_light">@color/material_deep_teal_500</color>
     <!-- From: file:/Users/devinyancey/Desktop/Senior%20Project/Parse-Starter-Project-1-2/ParseStarterProject/src/main/res/values/color.xml -->
     <eat-comment/>
-    <color name="actionbar_background">#2A373D</color>
+    <color name="actionbar_background">#0D2D26</color>
     <color name="actionbar_text">#ffffff</color>
     <!-- From: file:/Users/devinyancey/Desktop/Senior%20Project/Parse-Starter-Project-1-2/ParseStarterProject/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
@@ -223,6 +223,7 @@
     <!-- From: file:/Users/devinyancey/Desktop/Senior%20Project/Parse-Starter-Project-1-2/ParseStarterProject/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="title_activity_auto_sign_in">AutoSignInActivity</string>
+    <string name="title_activity_decision">DecisionActivity</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="title_activity_welcome">WelcomeActivity</string>

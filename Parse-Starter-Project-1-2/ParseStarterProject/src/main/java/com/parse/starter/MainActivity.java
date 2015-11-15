@@ -9,23 +9,30 @@
 package com.parse.starter;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.internal.widget.AdapterViewCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
@@ -37,11 +44,13 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +77,7 @@ public class MainActivity extends ActionBarActivity {
 
   byte[] image;
 
-  public Post test;
+
   int arraySize;
   @TargetApi(Build.VERSION_CODES.HONEYCOMB)
   @Override
@@ -82,103 +91,114 @@ public class MainActivity extends ActionBarActivity {
 
     query = new ParseQuery<>("Post");
     list = new ArrayList<>();
-
+    img = (ImageView) findViewById(R.id.userIcon);
     //query = ParseQuery.getQuery("Post");
-    test = new Post();
+
     Post test1 = new Post();
 
-    txt = (TextView) findViewById(R.id.textView3);
+
 
     //adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
 
-    lv = (ListView) findViewById(R.id.postListView);
-
-    pd = new ProgressDialog(MainActivity.this);
-
-/**
-    ///////////////////////////////////////////
-
-    query.whereEqualTo("displayName", "test");
-    query.findInBackground(new FindCallback<ParseObject>() {
-
-      @Override
-      public void done(final List<ParseObject> objects, ParseException e) {
-        Log.d("antone", "test");
-        Log.d("Testing", "123");
-        objectIds = new String[objects.size()];
-        String[] ids = new String[objects.size()];
-        if (e == null) {
-
-          Log.d("object size:", objects.size() + "");
-
-          for (int i = 0; i < objects.size(); i++) {
-            Log.d("Object:", objects.get(i).toString());
-
-
-            objectIds[i] = objects.get(i).getObjectId().toString();
-            ids[i] = objects.get(i).getObjectId().toString();
-
-            ParseObject parseObject = objects.get(i);
-            test.setUserName(objects.get(i) + "");
-            txt.setText(test.getUserName());
-          }
-          sendToAdpater(ids);
-
-          lv.setAdapter(listAdapter);
-        } else {
-
-        }
-      }
-    });
-
-    //listAdapter = new CustomAdapter(this, test);
-    ////////////////////////////////////////////
-**/
-
-    //query.whereEqualTo("displayName", "test");
-    query.findInBackground(new FindCallback<ParseObject>() {
-      @Override
-      public void done(List<ParseObject> objects, ParseException e) {
-        if (e == null){
-          Log.d("number of objects", objects.size() +"");
-          Post[] pst = new Post[objects.size()];
-          for (int i = 0; i < objects.size(); i++){
-            Log.d("ParseObject:", objects.get(i).toString());
-            pst[i] = (Post) objects.get(i);
-          }
-          sendToAdpater(pst);
-          lv.setAdapter(listAdapter);
-        }
-      }
-    });
-
-
-
-
-
     ParseUser user = new ParseUser();
+    //makePost();
+    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap
+            .steph);
 
 
-    makePost();
+    //Convert it to byte
+    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+    //compress the image
+    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+
+    byte[] image2 = stream.toByteArray();
+    image = image2;
+
     Post post = new Post();
     post.setOwner(user.getCurrentUser());
     post.setUserName(user.getCurrentUser().toString());
     post.setDisplayName(user.getCurrentUser().getUsername());
-    post.setVote1(2);
-    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable
-            .user_icon);
-
-    post.setImg1(image);
+    //post.setVote1(2);
+    //post.setImg1(image);
+    //post.setImg2(image);
+    post.setImg3(image);
     //post.put("Image1", file);
     ParseACL acl = new ParseACL();
     acl.setPublicReadAccess(true);
     acl.setPublicWriteAccess(true);
 
+    ParseFile file = new ParseFile("image", image2);
+    file.saveInBackground();
+    post.putImage(file);
     post.setACL(acl);
+    Log.d("post: ", post.getUserName() + "");
     //post.saveInBackground();
 
+    lv = (ListView) findViewById(R.id.postListView);
+
+    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        //Post post1 = lv.getItemAtPosition(position);
+        Intent intent = new Intent(MainActivity.this, DecisionActivity.class);
+        intent.putExtra("PostObject",(Post) lv.getItemAtPosition(position));
+        intent.putExtra("objectId", ((Post) lv.getItemAtPosition(position)).getObjectId().toString());
+        Toast.makeText(MainActivity.this, ((Post) lv.getItemAtPosition(position)).getObjectId().toString(),Toast.LENGTH_SHORT).show();
+        Log.d("object being Passed:", lv.getItemAtPosition(position).toString());
+        startActivity(intent);
+      }
+    });
+
+    pd = new ProgressDialog(MainActivity.this);
+
+
+
+    //query.whereEqualTo("displayName", "test");
+
+
+
+
+
+    /**
+    post.saveInBackground(new SaveCallback() {
+      @Override
+      public void done(ParseException e) {
+        if (e == null){
+          Log.d("saved: ", "true");
+        }
+      }
+    });
+     **/
+    queryPosts();
 
               ParseAnalytics.trackAppOpenedInBackground(getIntent());
+  }
+
+  public void queryPosts(){
+    query.setLimit(20);
+    //query.whereEqualTo("displayName", "day");
+    query.orderByDescending("createdAt");
+        query.findInBackground(new FindCallback<ParseObject>() {
+          @Override
+          public void done(List<ParseObject> objects, ParseException e) {
+            if (e == null) {
+              Log.d("number of objects", objects.size() + "");
+              objectPosts = new Post[objects.size()];
+              //Post[] pst = new Post[objects.size()];
+              for (int i = 0; i < objects.size(); i++) {
+                Log.d("ParseObject:", objects.get(i).toString());
+                //pst[i] = (Post) objects.get(i);
+                objectPosts[i] = (Post) objects.get(i);
+              }
+              sendToAdpater(objectPosts);
+              lv.setAdapter(listAdapter);
+            }
+          }
+        });
+
+
+
   }
 
   public void sendToAdpater(Post[] array){
@@ -192,24 +212,16 @@ public class MainActivity extends ActionBarActivity {
     pd.dismiss();
   }
 
-  public void addToListArray(List<ParseObject> lst){
-    list.clear();
-    for (int i = 0; i < lst.size(); i++){
-
-      list.add((Post) lst.get(i));
-      Log.d("Adding to Array list", "Added " + i +" "+((Post) lst.get(i)).getUserName());
-    }
-    txt.setText("Here");
-  }
 
   public void makePost(){
     //THis is to locate the image but it will be replaced by going into the
     //gallery/taking a picture
-    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable
-            .user_icon);
+    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap
+            .steph);
 
     //Convert it to byte
     ByteArrayOutputStream stream = new ByteArrayOutputStream();
+    BitmapFactory.Options o = new BitmapFactory.Options();
     //compress the image
     bitmap.compress(Bitmap.CompressFormat.PNG, 50, stream);
     byte[] image2 = stream.toByteArray();
@@ -220,21 +232,6 @@ public class MainActivity extends ActionBarActivity {
   }
 
 
-  public void getPosts(){
-    adapter.clear();
-
-    Log.d("Clearing Adapter", "Success");
-    for (int i = 0; i < list.size(); i++) {
-      Log.d("Adding to adapter", "success");
-      adapter.add(list.get(i).toString());
-
-    }
-    adapter.notifyDataSetChanged();
-
-    lv.setAdapter(adapter);
-
-    //pd.dismiss();
-  }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -250,11 +247,39 @@ public class MainActivity extends ActionBarActivity {
     // as you specify a parent activity in AndroidManifest.xml.
     int id = item.getItemId();
 
-    //noinspection SimplifiableIfStatement
-    if (id == R.id.action_settings) {
+    //Determine what action bar item user selected and perform action
+    if(id == R.id.action_new_post){
+      Intent intent2 = new Intent(MainActivity.this, CreatePost.class);
+
+      //Retrieve username to pass to next activity
+      String userName = un.getText().toString();
+      intent2.putExtra(userName, userName);
+
+      //Start CreatePost activity
+      startActivity(intent2);
+
+      finish();
+      return true;
+    } else if(id == R.id.action_refresh){
+      return true;
+    } else if(id == R.id.action_logout){
+      ParseUser.logOut();
+      Intent intent = new Intent(MainActivity.this,WelcomeActivity.class);
+      startActivity(intent);
+      finish();
+      return true;
+    } else if (id == R.id.action_settings) {
       return true;
     }
 
     return super.onOptionsItemSelected(item);
+  }
+
+
+  @Override
+  public void onDestroy(){
+    super.onDestroy();
+   un = null;
+    lv = null;
   }
 }
