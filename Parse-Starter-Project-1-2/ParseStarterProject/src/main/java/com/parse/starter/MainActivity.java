@@ -261,6 +261,8 @@ public class MainActivity extends ActionBarActivity {
       finish();
       return true;
     } else if(id == R.id.action_refresh){
+      finish();
+      startActivity(getIntent());
       return true;
     } else if(id == R.id.action_logout){
       ParseUser.logOut();
@@ -268,9 +270,9 @@ public class MainActivity extends ActionBarActivity {
       startActivity(intent);
       finish();
       return true;
-    } else if (id == R.id.action_settings) {
-      return true;
-    }
+    } //else if (id == R.id.action_settings) {
+      //return true;
+    //}
 
     return super.onOptionsItemSelected(item);
   }

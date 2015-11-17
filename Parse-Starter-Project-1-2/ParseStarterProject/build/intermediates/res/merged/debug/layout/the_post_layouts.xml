@@ -5,175 +5,161 @@
     android:weightSum="1"
     android:background="#FFFFFF">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView" >
 
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="50dp"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/userPicture"
-                android:layout_margin="7dp"
-                android:src="@android:drawable/btn_star_big_on" />
+                android:layout_gravity="center_horizontal">
 
-            <TextView
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Username"
+                        android:id="@+id/userName2"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="7dp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="165dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:id="@+id/imageVote1"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="18dp"
+                        android:adjustViewBounds="true"
+                        android:onClick="voteForOne"/>
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:id="@+id/imageVote2"
+                        android:paddingBottom="10dp"
+                        android:layout_alignTop="@+id/imageVote1"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="18dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginLeft="5dp"
+                        android:onClick="voteForTwo"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="0"
+                        android:id="@+id/voteNumber1"
+                        android:layout_marginLeft="87dp"
+                        android:textAlignment="center"
+                        android:padding="10dp"
+                        android:layout_marginStart="87dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:onClick="voteForOne"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="0"
+                        android:id="@+id/voteNumber2"
+                        android:layout_marginRight="81dp"
+                        android:padding="10dp"
+                        android:layout_marginEnd="81dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:onClick="voteForTwo"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="110dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="100dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="users description"
+                        android:id="@+id/userDescription"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:paddingTop="2dp"
+                        android:paddingLeft="5dp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="50dp"
+                android:layout_height="100dp">
 
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Username"
-                android:id="@+id/userName2"
-                android:layout_gravity="center_horizontal"
-                android:layout_alignTop="@+id/userPicture"
-                android:layout_toRightOf="@+id/userPicture"
-                android:layout_toEndOf="@+id/userPicture"
-                android:layout_marginTop="7dp" />
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="New Text"
+                    android:id="@+id/commentSection"
+                    />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="165dp"
-        >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:id="@+id/imageVote1"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="18dp"
-                android:adjustViewBounds="true"
-                android:background="@drawable/commentback"
-                android:onClick="voteForOne"/>
-
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:id="@+id/imageVote2"
-                android:paddingBottom="10dp"
-                android:layout_alignTop="@+id/imageVote1"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="18dp"
-                android:adjustViewBounds="true"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginLeft="5dp"
-                android:background="@drawable/commentback"
-                android:onClick="voteForTwo"/>
-
-        </RelativeLayout>
-    </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="0"
-                android:id="@+id/voteNumber1"
-                android:layout_marginLeft="87dp"
-                android:textAlignment="center"
-                android:padding="10dp"
-                android:layout_marginStart="87dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:onClick="voteForOne"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="0"
-                android:id="@+id/voteNumber2"
-                android:layout_marginRight="81dp"
-                android:padding="10dp"
-                android:layout_marginEnd="81dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:onClick="voteForTwo"/>
-        </RelativeLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="110dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="29dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Username:"
-                android:id="@+id/userName3"
-                android:layout_gravity="center_horizontal"
-
-                android:layout_marginTop="7dp"
-                android:layout_marginLeft="18dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="users description"
-                android:id="@+id/userDescription"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_toRightOf="@+id/userName3"
-                android:layout_toEndOf="@+id/userName3"
-                android:layout_alignTop="@+id/userName3"
-                android:paddingTop="2dp"
-                android:paddingLeft="5dp" />
-        </RelativeLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="100dp">
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="New Text"
-            android:id="@+id/commentSection"
-            android:background="@drawable/commentback"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="50dp">
 
         <EditText
             android:layout_width="250dp"
@@ -183,6 +169,7 @@
             android:inputType="textMultiLine"
             android:maxLength="21"
             android:maxLines="4"
+            android:windowSoftInputMode="stateUnchanged"
             />
 
         <Button
@@ -192,4 +179,5 @@
             android:id="@+id/sendComment" />
 
     </LinearLayout>
+
 </LinearLayout><!-- From: file:/Users/devinyancey/Desktop/Senior%20Project/Parse-Starter-Project-1-2/ParseStarterProject/src/main/res/layout/the_post_layouts.xml -->

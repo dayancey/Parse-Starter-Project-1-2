@@ -58,21 +58,30 @@ class CustomAdapter extends ArrayAdapter<Post> {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View customView = inflater.inflate(R.layout.post_description_layout, parent, false);
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Post");;
+        userName = (TextView) customView.findViewById(R.id.userNameInfo);
+        description = (TextView) customView.findViewById(R.id.usersDescription);
+        //userProfPic = (ImageView) customView.findViewById(R.id.userProfPic);
+
         //get reference to everything
+
         final Post post = getItem(position);
+        String descriptions = post.getString("comment");
         if (post == null){
             Log.d("Post is null", "true");
 
         }
         if (post != null){
-        userName = (TextView) customView.findViewById(R.id.userNameInfo);
-            description = (TextView) customView.findViewById(R.id.usersDescription);
 
             //userName.setText("Username: This will be the usernames");
-            description.setText("Description: This mouth cheats without the shaky lord. " +
-                    "Why won't the warp part the ");
-            userProfPic = (ImageView) customView.findViewById(R.id.userProfPic);
-            userName.setText("username: "+post.getString("displayName"));
+            //userName.setText("username: "+post.getString("displayName"));
+            userName.setText(post.getString("displayName"));
+            if (!descriptions.isEmpty()) {
+                description.setText("Description: " + descriptions);
+            }else{
+                description.setText("Description: No Description");
+            }
+
+
 
             /**
              *

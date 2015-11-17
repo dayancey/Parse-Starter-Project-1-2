@@ -30,7 +30,7 @@ MERGED from [com.android.support:support-v4:22.2.0] /Users/devinyancey/Desktop/S
 	android:allowBackup
 		ADDED from /Users/devinyancey/Desktop/Senior Project/Parse-Starter-Project-1-2/ParseStarterProject/src/main/AndroidManifest.xml:18:9-35
 	android:icon
-		ADDED from /Users/devinyancey/Desktop/Senior Project/Parse-Starter-Project-1-2/ParseStarterProject/src/main/AndroidManifest.xml:19:9-43
+		ADDED from /Users/devinyancey/Desktop/Senior Project/Parse-Starter-Project-1-2/ParseStarterProject/src/main/AndroidManifest.xml:19:9-38
 	android:largeHeap
 		ADDED from /Users/devinyancey/Desktop/Senior Project/Parse-Starter-Project-1-2/ParseStarterProject/src/main/AndroidManifest.xml:21:9-33
 	android:theme

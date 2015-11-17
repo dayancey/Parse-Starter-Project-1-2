@@ -59,6 +59,7 @@ public class Post extends ParseObject implements Serializable{
 
     public void setComment(String comment){
         put("comment",comment);
+
     }
 
 
@@ -107,7 +108,7 @@ public class Post extends ParseObject implements Serializable{
     }
 
     public void setVote2(int voteForimg2){
-        put("voteImage1", voteForimg2);
+        put("voteImage2", voteForimg2);
     }
 
     public void putImage(ParseFile file){

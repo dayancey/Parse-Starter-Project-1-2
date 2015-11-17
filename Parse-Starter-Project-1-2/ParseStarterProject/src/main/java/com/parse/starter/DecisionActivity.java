@@ -24,7 +24,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class DecisionActivity extends AppCompatActivity {
-    TextView userName;
+    TextView userName, userName3, userDescription;
     TextView vote1Num, vote2Num;
 
     Post post;
@@ -32,9 +32,11 @@ public class DecisionActivity extends AppCompatActivity {
     ParseQuery<ParseObject> query;
     ImageView img1, img2, iconImg;
     String description;
-    int vote1, vote2;
+    int vote1, vote2, clicked1, clicked2;
     Bitmap bitmap, bitmap2;
     ByteArrayOutputStream stream;
+    ByteArrayOutputStream stream2;
+    boolean voted1 = false, voted2 = false;
     byte[] arr, arr2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +46,15 @@ public class DecisionActivity extends AppCompatActivity {
         userName = (TextView) findViewById(R.id.userName2);
         vote1Num = (TextView) findViewById(R.id.voteNumber1);
         vote2Num = (TextView) findViewById(R.id.voteNumber2);
+        //userName3 = (TextView) findViewById(R.id.userName3);
+        userDescription = (TextView) findViewById(R.id.userDescription);
         img1 = (ImageView) findViewById(R.id.imageVote1);
         img2 = (ImageView) findViewById(R.id.imageVote2);
 
         //initalize other fields
         query = new ParseQuery<ParseObject>("Post");
-
+        clicked1 = 0;
+        clicked2 = 0;
 
         //get the objectId that was passed intent
         Intent intent = getIntent();
@@ -69,28 +74,34 @@ public class DecisionActivity extends AppCompatActivity {
                     post = (Post) object;
                     userName.setText(post.getDisplayName() + "");
                     vote1Num.setText(post.get("voteImage1")+"");
+                    vote2Num.setText(post.get("voteImage2")+"");
+                    userDescription.setText(post.get("comment") + "");
+                    //userName3.setText(post.getDisplayName()+"");
                     //Log.d("username", post.getUserName());
                     //arr = (byte[]) post.get("imageTest");
                     //arr = post.getImg2();
-                    ParseFile file = (ParseFile) post.get("Image");
+                    ParseFile file = (ParseFile) post.get("rightImage");
+                    ParseFile file1 = (ParseFile) post.get("leftImage");
 
                     try {
+                        arr = file1.getData();
                         arr2 = file.getData();
 
                     } catch (ParseException e1) {
                         e1.printStackTrace();
                     }
 
-                    if (arr2 != null) {
+                    if (arr != null && arr2 != null) {
                         Log.d("arr2", arr2 + "");
                         stream = new ByteArrayOutputStream();
-                        //bitmap = BitmapFactory.decodeByteArray(arr, 0, arr.length);
-                        //bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                        //img1.setImageBitmap(bitmap);
-                        //bitmap = null;
+                        stream2 = new ByteArrayOutputStream();
+                        bitmap = BitmapFactory.decodeByteArray(arr, 0, arr.length);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 0, stream2);
+                        img1.setImageBitmap(bitmap);
+                        bitmap = null;
 
                         bitmap2 = BitmapFactory.decodeByteArray(arr2, 0, arr2.length);
-                        bitmap2.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        bitmap2.compress(Bitmap.CompressFormat.JPEG, 0, stream);
                         img2.setImageBitmap(bitmap2);
                         bitmap = null;
                     }
@@ -104,19 +115,60 @@ public class DecisionActivity extends AppCompatActivity {
 
     public void voteForOne(View view) throws ParseException {
         vote1 = (Integer) post.get("voteImage1");
-        post.setVote1(vote1+1);
-        try {
-            post.save();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        vote1Num.setText(vote1+1 +"");
+        if (voted2 == false) {
+            if (clicked1 == 0) {
+                post.setVote1(vote1 + 1);
+                try {
+                    post.save();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                vote1Num.setText(vote1 + 1 + "");
+                clicked1 = 1;
+                voted1 = true;
+            } else {
 
+                post.setVote1((vote1 - 1));
+                try {
+                    post.save();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                vote1Num.setText(vote1 - 1 + "");
+                clicked1 = 0;
+                voted1 = false;
+            }
+
+        }
     }
 
-    public void voteForTwo(View view){
+    public void voteForTwo(View view) throws ParseException {
         vote2 = (Integer) post.get("voteImage2");
-        post.setVote1(vote2+1);
+        if (voted1 == false) {
+            if (clicked2 == 0) {
+                post.setVote2(vote2 + 1);
+                try {
+                    post.save();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                vote2Num.setText(vote2 + 1 + "");
+                clicked2 = 1;
+                voted2 = true;
+            } else {
+
+                post.setVote2(vote2 - 1);
+                try {
+                    post.save();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                vote2Num.setText(vote2 - 1 + "");
+                clicked2 = 0;
+                voted2 = false;
+            }
+
+        }
     }
 
     @Override

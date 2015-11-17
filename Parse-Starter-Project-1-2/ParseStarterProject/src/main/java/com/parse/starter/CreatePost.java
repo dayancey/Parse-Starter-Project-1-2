@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.ParseFile;
 import com.parse.ParseACL;
+import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -206,6 +208,20 @@ Below everything is null because it doesn't wait for image choice
         });
 
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            ParseUser currentUser = ParseUser.getCurrentUser();
+            Intent intent = new Intent(CreatePost.this, MainActivity.class);
+            intent.putExtra("userName", currentUser.getUsername().toString().trim());
+            startActivity(intent);
+            return true;
+        }
+        return false;
     }
 
     public boolean descriptionIsThere() {
@@ -435,14 +451,16 @@ Below everything is null because it doesn't wait for image choice
 
         //Retrieve comment about post
         comment = text.getText().toString();
-
+        Log.d("comment", comment);
 
         //Save post to Parse
-
+        final ParseUser currentUser = ParseUser.getCurrentUser();
         newPost.setOwner(user.getCurrentUser());
         newPost.setDisplayName(user.getCurrentUser().getUsername());
         newPost.setImg1(leftFile);
         newPost.setImg2(rightFile);
+        newPost.setVote1(0);
+        newPost.setVote2(0);
         //newPost.putImage(leftFile);
         newPost.setComment(comment);
         ParseACL acl = new ParseACL();
@@ -452,13 +470,23 @@ Below everything is null because it doesn't wait for image choice
         Log.d("left image: ", leftFile.toString());
         Log.d("right image: ", rightFile.toString());
         Log.d("userparsess :", user.getCurrentUser().toString());
-        newPost.saveInBackground();
+        //newPost.saveInBackground();
+        newPost.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null){
+                    Intent intent = new Intent(CreatePost.this, MainActivity.class);
+                    intent.putExtra("userName", currentUser.getUsername().toString().trim());
+                    startActivity(intent);
+                }
+            }
+        });
         //user.saveInBackground();
 
 
         //Return to MainActivity
-          Intent intent = new Intent(CreatePost.this, MainActivity.class);
-          startActivity(intent);
+          //Intent intent = new Intent(CreatePost.this, MainActivity.class);
+          //startActivity(intent);
 
     }
 

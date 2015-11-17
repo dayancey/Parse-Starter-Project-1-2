@@ -47,6 +47,8 @@ public class WelcomeActivity extends ActionBarActivity {
         Button signupButton = (Button) findViewById(R.id.signUpBttn);
         signupButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+
                 // Starts an intent for the sign up activity
                 Intent intent = new Intent(WelcomeActivity.this, SignUpActivity.class);
                 intent.putExtra("userName", username.getText().toString().trim());

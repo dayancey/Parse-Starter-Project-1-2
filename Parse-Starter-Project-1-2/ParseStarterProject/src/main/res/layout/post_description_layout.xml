@@ -1,35 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="110dp">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/userProfPic" />
+        android:layout_height="fill_parent"
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Username"
             android:id="@+id/userNameInfo"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/userProfPic"
-            android:layout_toEndOf="@+id/userProfPic" />
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"
+            android:textColor="#1D8D77"
+            android:textSize="21dp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:id="@+id/usersDescription"
+            android:layout_below="@+id/userNameInfo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#0D2D26" />
 
     </RelativeLayout>
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="100dp"
-        android:id="@+id/usersDescription"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
 </LinearLayout>
