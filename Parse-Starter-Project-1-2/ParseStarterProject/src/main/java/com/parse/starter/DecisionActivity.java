@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,14 +25,15 @@ import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class DecisionActivity extends AppCompatActivity {
-    TextView userName, userName3, userDescription;
+    TextView userName, userName3, userDescription, commentSection;
     TextView vote1Num, vote2Num;
-
+    EditText comments;
     Post post;
     String objectId;
     ParseQuery<ParseObject> query;
     ImageView img1, img2, iconImg;
     String description;
+
     int vote1, vote2, clicked1, clicked2;
     Bitmap bitmap, bitmap2;
     ByteArrayOutputStream stream;
@@ -46,8 +48,10 @@ public class DecisionActivity extends AppCompatActivity {
         userName = (TextView) findViewById(R.id.userName2);
         vote1Num = (TextView) findViewById(R.id.voteNumber1);
         vote2Num = (TextView) findViewById(R.id.voteNumber2);
+        commentSection = (TextView) findViewById(R.id.commentSection);
         //userName3 = (TextView) findViewById(R.id.userName3);
         userDescription = (TextView) findViewById(R.id.userDescription);
+        comments = (EditText) findViewById(R.id.comment);
         img1 = (ImageView) findViewById(R.id.imageVote1);
         img2 = (ImageView) findViewById(R.id.imageVote2);
 
@@ -76,6 +80,11 @@ public class DecisionActivity extends AppCompatActivity {
                     vote1Num.setText(post.get("voteImage1")+"");
                     vote2Num.setText(post.get("voteImage2")+"");
                     userDescription.setText(post.get("comment") + "");
+                    if (post.get("comments") != null) {
+                        commentSection.setText(post.get("comments") + "");
+                    }else{
+                        commentSection.setText("No Comments Yet. Be The First!!!");
+                    }
                     //userName3.setText(post.getDisplayName()+"");
                     //Log.d("username", post.getUserName());
                     //arr = (byte[]) post.get("imageTest");
@@ -169,6 +178,29 @@ public class DecisionActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    public void sendComment(View view){
+        String comm = commentSection.getText().toString().trim();
+        String commToSubmit = comments.getText().toString().trim();
+
+
+        if (comm != null) {
+
+            Log.d("comments", comm);
+            post.setComments(comm + " \n" + "\n"+
+                    userName.getText().toString().trim()+ ": "+commToSubmit );
+            post.saveInBackground();
+        }else if (comm.equals("No Comments Yet. Be The First!!!")){
+            post.setComments(commToSubmit);
+            post.saveInBackground();
+        }else{
+            post.setComments(commToSubmit);
+            post.saveInBackground();
+        }
+
+        finish();
+        startActivity(getIntent());
     }
 
     @Override

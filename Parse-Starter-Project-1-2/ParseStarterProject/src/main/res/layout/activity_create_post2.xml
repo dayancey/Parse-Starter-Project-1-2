@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.parse.starter.Post"
+    android:weightSum="1">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/userPicture"
+                android:src="@android:drawable/btn_star_big_on"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="7dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Username"
+                android:id="@+id/userName2"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignTop="@+id/userPicture"
+                android:layout_toRightOf="@+id/userPicture"
+                android:layout_toEndOf="@+id/userPicture"
+                android:layout_marginTop="7dp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="110dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:hint="Descriptions"
+                android:id="@+id/userDescription"
+                android:layout_alignParentRight="false"
+                android:layout_alignParentEnd="true"
+                android:paddingTop="2dp"
+                android:paddingLeft="5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:maxLength="140"
+                android:textSize="15dp"
+                android:singleLine="false"
+                android:backgroundTint="#eeeeee"
+                android:layout_alignParentBottom="false" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="165dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:id="@+id/imageVote1"
+                android:background= "#999999"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="18dp"
+                android:adjustViewBounds="true"/>
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:id="@+id/imageVote2"
+                android:paddingBottom="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="18dp"
+                android:background= "#999999"
+                android:adjustViewBounds="true"
+                android:layout_alignTop="@+id/imageVote1"
+                android:layout_toRightOf="@+id/imageVote1"
+                android:layout_toEndOf="@+id/imageVote1" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="0"
+                android:id="@+id/voteNumber1"
+                android:layout_marginLeft="87dp"
+                android:textAlignment="center"
+                android:padding="10dp"
+                android:layout_marginStart="87dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="0"
+                android:id="@+id/voteNumber2"
+                android:layout_marginRight="81dp"
+                android:padding="10dp"
+                android:layout_marginEnd="81dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <Button
+            android:layout_width="153dp"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:id="@+id/submitBtn"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="110dp"
+            android:clickable="true" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,7 +1,12 @@
 package com.parse.starter;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,13 +17,23 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
+
+import java.io.ByteArrayOutputStream;
+
+import static com.parse.starter.R.drawable.user_icon;
 
 public class SignUpActivity extends AppCompatActivity {
     EditText usernameEditText;
     EditText passwordEditText;
     EditText passwordAgainEditText;
+    String email;
+    byte[] profilePic;
+    ParseFile file;
+    String username, password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,10 +45,11 @@ public class SignUpActivity extends AppCompatActivity {
         passwordEditText = (EditText) findViewById(R.id.passwordSignupEdt);
         passwordAgainEditText = (EditText) findViewById(R.id.password_again_edit_text);
 
-        String userName = (String) getIntent().getSerializableExtra("userName");
-        String password = (String) getIntent().getSerializableExtra("password");
+        username = (String) getIntent().getSerializableExtra("userName");
+        password = (String) getIntent().getSerializableExtra("password");
+        email = (String) getIntent().getSerializableExtra("email");
 
-        usernameEditText.setText(userName);
+        usernameEditText.setText(username);
         passwordEditText.setText(password);
 
 
@@ -86,16 +102,42 @@ public class SignUpActivity extends AppCompatActivity {
         dialog.setMessage(getString(R.string.progress_signup));
         dialog.show();
 
+        //Drawable drawable = this.getResources().getDrawable(R.drawable.user_icon);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), user_icon);
+
+
+        // Convert it to byte
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        // Compress image to lower quality scale 1 - 100
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] arr = stream.toByteArray();
+        profilePic = arr;
+
         // Set up a new Parse user
+
+        file = new ParseFile("profilePicture", profilePic);
+        file.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                saveUser();
+            }
+        });
+
+
+    }
+
+    public void saveUser(){
         ParseUser user = new ParseUser();
         user.setUsername(username);
         user.setPassword(password);
+        user.setEmail(email);
+        user.put("profilePicture", file);
 
         // Call the Parse signup method
         user.signUpInBackground(new SignUpCallback() {
             @Override
             public void done(ParseException e) {
-                dialog.dismiss();
+
                 if (e != null) {
                     // Show the error message
                     Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();

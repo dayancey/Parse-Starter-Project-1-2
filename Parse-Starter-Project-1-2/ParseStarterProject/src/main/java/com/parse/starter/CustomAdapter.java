@@ -41,6 +41,10 @@ class CustomAdapter extends ArrayAdapter<Post> {
     TextView userName;
     TextView description;
     ImageView userProfPic;
+    ParseFile file;
+    byte[] arr;
+
+
 
     CustomAdapter(Context context, Post[] posts){
         super(context, R.layout.the_post_layouts, posts);
@@ -60,6 +64,8 @@ class CustomAdapter extends ArrayAdapter<Post> {
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Post");;
         userName = (TextView) customView.findViewById(R.id.userNameInfo);
         description = (TextView) customView.findViewById(R.id.usersDescription);
+        userProfPic = (ImageView) customView.findViewById(R.id.postUserPic);
+
         //userProfPic = (ImageView) customView.findViewById(R.id.userProfPic);
 
         //get reference to everything
@@ -71,54 +77,30 @@ class CustomAdapter extends ArrayAdapter<Post> {
 
         }
         if (post != null){
+            if (post.get("profilePicture") != null) {
+                file = (ParseFile) post.get("profilePicture");
+                try {
+                    arr = file.getData();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                stream = new ByteArrayOutputStream();
 
+                bitmap = BitmapFactory.decodeByteArray(arr, 0, arr.length);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 0, stream);
+                userProfPic.setImageBitmap(bitmap);
+                bitmap = null;
+            }
             //userName.setText("Username: This will be the usernames");
             //userName.setText("username: "+post.getString("displayName"));
             userName.setText(post.getString("displayName"));
             if (!descriptions.isEmpty()) {
-                description.setText("Description: " + descriptions);
+                description.setText(descriptions);
             }else{
-                description.setText("Description: No Description");
+                description.setText("No Description");
             }
 
 
-
-            /**
-             *
-             *
-             *
-             *
-             final TextView userName = (TextView) customView.findViewById(R.id.userName2);
-             TextView userName3 = (TextView) customView.findViewById(R.id.userName3);
-             TextView userDescription = (TextView) customView.findViewById(R.id.userDescription);
-             TextView vote1 = (TextView) customView.findViewById(R.id.voteNumber1);
-             TextView vote2 = (TextView) customView.findViewById(R.id.voteNumber2);
-
-             ImageView userImage = (ImageView) customView.findViewById(R.id.userPicture);
-
-             final ImageView image1 = (ImageView) customView.findViewById(R.id.imageVote1);
-             final ImageView image2 = (ImageView) customView.findViewById(R.id.imageVote2);
-
-             userName.setText(post.getString("displayName"));
-
-            byte[] arr = (byte[]) post.get("imageTest");
-            if (arr != null) {
-                bitmap = BitmapFactory.decodeByteArray(arr, 0, arr.length);
-                bitmap.compress(Bitmap.CompressFormat.PNG, 25, stream);
-                image1.setImageBitmap(bitmap);
-                bitmap = null;
-            }
-            byte[] arr2 = (byte[]) post.get("imageTest2");
-            if (arr2 != null){
-                bitmap2 = BitmapFactory.decodeByteArray(arr2,0,arr2.length);
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                BitmapFactory.Options o = new BitmapFactory.Options();
-                //compress the image
-                bitmap2.compress(Bitmap.CompressFormat.PNG, 25, stream);
-                image2.setImageBitmap(bitmap2);
-                bitmap2 = null;
-            }
-             **/
         Log.d("DisplayName:", post.getString("displayName"));
 
         //userName.setText(postItem.getUserName() + "");
@@ -135,21 +117,7 @@ class CustomAdapter extends ArrayAdapter<Post> {
         //userImage.setImageResource(R.mipmap.steph);
 
         }
-        /**
-        customView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "clicked",Toast.LENGTH_SHORT).show();
-                ParseUser currentUser = ParseUser.getCurrentUser();
-                // Start an intent for the dispatch activity
-                Post post1 = getItem(position);
-                Intent intent = new Intent(getContext(), DecisionActivity.class);
-                //intent.putExtra("postObject", (Parcelable) post1);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                //getContext().startActivity(intent);
-            }
-        });
-         **/
+
         return customView;
     }
 

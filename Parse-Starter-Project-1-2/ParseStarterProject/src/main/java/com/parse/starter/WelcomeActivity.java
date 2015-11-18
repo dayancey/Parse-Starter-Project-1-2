@@ -21,6 +21,7 @@ import com.parse.SignUpCallback;
 public class WelcomeActivity extends ActionBarActivity {
     EditText username;
     EditText password;
+    EditText email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +29,7 @@ public class WelcomeActivity extends ActionBarActivity {
 
         username = (EditText) findViewById(R.id.userName);
         password = (EditText) findViewById(R.id.password);
-
+        email = (EditText) findViewById(R.id.email);
         autoSignIn();
 
 
@@ -53,6 +54,7 @@ public class WelcomeActivity extends ActionBarActivity {
                 Intent intent = new Intent(WelcomeActivity.this, SignUpActivity.class);
                 intent.putExtra("userName", username.getText().toString().trim());
                 intent.putExtra("password", password.getText().toString().trim());
+                intent.putExtra("email", email.getText().toString().trim());
                 startActivity(intent);
                 finish();
             }
@@ -131,7 +133,10 @@ public class WelcomeActivity extends ActionBarActivity {
     }
 
     public void forgotPassword(View view){
-        Toast.makeText(WelcomeActivity.this, "test", Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(WelcomeActivity.this, PasswordReset.class);
+        startActivity(intent);
+
     }
 
 

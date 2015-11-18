@@ -226,6 +226,7 @@
     <string name="title_activity_decision">DecisionActivity</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_user_page">UserPage</string>
     <string name="title_activity_welcome">WelcomeActivity</string>
     <string name="userName">username</string>
     <!-- From: file:/Users/devinyancey/Desktop/Senior%20Project/Parse-Starter-Project-1-2/ParseStarterProject/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->

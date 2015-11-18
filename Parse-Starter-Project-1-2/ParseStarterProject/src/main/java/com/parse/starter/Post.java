@@ -114,6 +114,14 @@ public class Post extends ParseObject implements Serializable{
     public void putImage(ParseFile file){
         put("Image", file);
     }
+    public void setUserPicture(ParseFile photo){
+
+        put("profilePicture", photo);
+
+    }
+    public void setComments(String string){
+        put("comments", string);
+    }
 
     public int getVote(){
         return 1;

@@ -76,6 +76,10 @@ public class MainActivity extends ActionBarActivity {
   Post[] objectPosts;
 
   byte[] image;
+  byte[] arr;
+
+  Bitmap bitmap;
+  ByteArrayOutputStream stream;
 
 
   int arraySize;
@@ -92,6 +96,19 @@ public class MainActivity extends ActionBarActivity {
     query = new ParseQuery<>("Post");
     list = new ArrayList<>();
     img = (ImageView) findViewById(R.id.userIcon);
+    ParseFile fild = (ParseFile) ParseUser.getCurrentUser().get("profilePicture");
+    try {
+      arr = fild.getData();
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+    if (arr != null){
+      stream = new ByteArrayOutputStream();
+
+      bitmap = BitmapFactory.decodeByteArray(arr, 0, arr.length);
+
+      img.setImageBitmap(bitmap);
+    }
     //query = ParseQuery.getQuery("Post");
 
     Post test1 = new Post();
@@ -275,6 +292,15 @@ public class MainActivity extends ActionBarActivity {
     //}
 
     return super.onOptionsItemSelected(item);
+  }
+
+  public void goToUserPage(View view){
+
+    //ParseUser currentUser = ParseUser.getCurrentUser();
+    Intent intent = new Intent(MainActivity.this, UserPage.class);
+    // intent.putExtra("userName", currentUser.getUsername().toString().trim());
+    intent.putExtra("userName", un.getText());
+    startActivity(intent);
   }
 
 

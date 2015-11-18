@@ -29,5 +29,6 @@
     <string name="userName">username</string>
     <string name="title_activity_auto_sign_in">AutoSignInActivity</string>
     <string name="title_activity_decision">DecisionActivity</string>
+    <string name="title_activity_user_page">UserPage</string>
 
 </resources>

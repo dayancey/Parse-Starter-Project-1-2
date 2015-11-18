@@ -62,6 +62,14 @@
             android:name="com.parse.starter.DecisionActivity"
             android:label="@string/title_activity_decision" >
         </activity>
+        <activity
+            android:name="com.parse.starter.PasswordReset"
+            android:label="password" >
+        </activity>
+        <activity
+            android:name="com.parse.starter.UserPage"
+            android:label="@string/title_activity_user_page" >
+        </activity>
     </application>
 
 </manifest>

@@ -26,6 +26,7 @@ public class StarterApplication extends Application {
     //Parse.enableLocalDatastore(this);
 
     ParseObject.registerSubclass(Post.class);
+    ParseObject.registerSubclass(photoFile.class);
     // Add your initialization code here
     Parse.initialize(this, "Svhc6XbmgzKhhvpnaxF8B7YuPYoyAebYpyJF5Hwu", "ijC4XaCIsehsuZ35npHNuKhm4TBlh9MVZmxMQpU8");
 
