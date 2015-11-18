@@ -50,11 +50,12 @@
         </activity>
         <activity
             android:name=".CreatePost"
-            android:label="CreatePost" >
+            android:label="CreatePost">
         </activity>
         <activity
             android:name=".DecisionActivity"
-            android:label="@string/title_activity_decision" >
+            android:label="@string/title_activity_decision"
+            >
         </activity>
         <activity
             android:name=".PasswordReset"

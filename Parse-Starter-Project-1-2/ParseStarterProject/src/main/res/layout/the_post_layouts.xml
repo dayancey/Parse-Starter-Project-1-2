@@ -10,7 +10,8 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -181,10 +182,10 @@
 
                 <Button
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Send"
+                    android:layout_height="40dp"
                     android:id="@+id/sendComment"
-                    android:onClick="sendComment"/>
+                    android:onClick="sendComment"
+                    android:background="@drawable/sendbttn"/>
 
             </LinearLayout>
         </LinearLayout>

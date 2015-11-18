@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/userPicture"
-                android:src="@android:drawable/btn_star_big_on"
+
                 android:layout_marginLeft="7dp"
                 android:layout_marginTop="7dp" />
 
@@ -36,7 +36,8 @@
                 android:layout_alignTop="@+id/userPicture"
                 android:layout_toRightOf="@+id/userPicture"
                 android:layout_toEndOf="@+id/userPicture"
-                android:layout_marginTop="7dp" />
+                android:layout_marginTop="7dp"
+                android:textColor="#1D8D77" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -56,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="110dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:hint="Descriptions"
+                android:hint="Post Description"
                 android:id="@+id/userDescription"
                 android:layout_alignParentRight="false"
                 android:layout_alignParentEnd="true"
@@ -101,7 +102,7 @@
                 android:id="@+id/imageVote2"
                 android:paddingBottom="10dp"
                 android:layout_marginLeft="5dp"
-                android:layout_marginRight="18dp"
+                android:layout_marginRight="16dp"
                 android:background= "#999999"
                 android:adjustViewBounds="true"
                 android:layout_alignTop="@+id/imageVote1"
@@ -151,17 +152,17 @@
 
     </LinearLayout>
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="150dp">
         <Button
             android:layout_width="153dp"
             android:layout_height="wrap_content"
-            android:text="Submit"
             android:id="@+id/submitBtn"
             android:layout_gravity="top|center_horizontal"
             android:layout_marginLeft="110dp"
             android:layout_marginTop="100dp"
             android:layout_marginRight="110dp"
-            android:clickable="true" />
+            android:clickable="true"
+            android:background="@drawable/submitbttn"/>
     </LinearLayout>
 </LinearLayout><!-- From: file:/Users/devinyancey/Desktop/Senior%20Project/Parse-Starter-Project-1-2/ParseStarterProject/src/main/res/layout/activity_create_post2.xml -->

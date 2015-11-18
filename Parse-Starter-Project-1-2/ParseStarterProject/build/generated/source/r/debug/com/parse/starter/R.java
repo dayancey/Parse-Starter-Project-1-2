@@ -1537,14 +1537,16 @@ containing a value of this type.
         public static final int login=0x7f020044;
         public static final int loginbttn=0x7f020045;
         public static final int mail=0x7f020046;
-        public static final int notification_template_icon_bg=0x7f02004e;
+        public static final int notification_template_icon_bg=0x7f020050;
         public static final int roundedrectangle=0x7f020047;
-        public static final int signupbtt=0x7f020048;
-        public static final int user_icon=0x7f020049;
-        public static final int usernmpic=0x7f02004a;
-        public static final int waffle=0x7f02004b;
-        public static final int waffleicon=0x7f02004c;
-        public static final int waffletxt=0x7f02004d;
+        public static final int sendbttn=0x7f020048;
+        public static final int signupbtt=0x7f020049;
+        public static final int submitbttn=0x7f02004a;
+        public static final int user_icon=0x7f02004b;
+        public static final int usernmpic=0x7f02004c;
+        public static final int waffle=0x7f02004d;
+        public static final int waffleicon=0x7f02004e;
+        public static final int waffletxt=0x7f02004f;
     }
     public static final class id {
         public static final int action0=0x7f0c007a;

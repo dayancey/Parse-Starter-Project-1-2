@@ -47,6 +47,7 @@ public class CreatePost extends ActionBarActivity{
     String comment;
     Bitmap bitmap, bitmap2;
     ByteArrayOutputStream stream;
+    TextView userTitle;
 
     boolean description = false;
 

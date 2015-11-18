@@ -270,7 +270,7 @@ public class MainActivity extends ActionBarActivity {
 
       //Retrieve username to pass to next activity
       String userName = un.getText().toString();
-      intent2.putExtra(userName, userName);
+      intent2.putExtra("userName", userName);
 
       //Start CreatePost activity
       startActivity(intent2);

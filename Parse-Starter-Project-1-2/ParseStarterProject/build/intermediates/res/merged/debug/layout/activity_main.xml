@@ -59,7 +59,7 @@
             android:id="@+id/postListView"
             tools:listitem="@android:layout/simple_list_item_1"
             android:divider="#F2F2F2"
-            android:dividerHeight="2px"
+            android:dividerHeight="4px"
             android:background="#FFFFFF"
             />
     </LinearLayout>
