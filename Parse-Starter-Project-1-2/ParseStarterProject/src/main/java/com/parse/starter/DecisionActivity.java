@@ -43,6 +43,7 @@ public class DecisionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.the_post_layouts);
         //get the views for all the widgets
         userName = (TextView) findViewById(R.id.userName2);

@@ -26,7 +26,7 @@ public class WelcomeActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-
+        getSupportActionBar().hide();
         username = (EditText) findViewById(R.id.userName);
         password = (EditText) findViewById(R.id.password);
         email = (EditText) findViewById(R.id.email);

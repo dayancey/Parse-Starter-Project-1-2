@@ -3,6 +3,7 @@ package com.parse.starter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -20,6 +21,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -28,6 +30,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.GetDataCallback;
@@ -141,6 +144,59 @@ public class UserPage extends ActionBarActivity {
                 intent.putExtra("userName", currentUser.getUsername().trim()); //send the userName to MAinActivity
                 // intent.putExtra("miniUserPic", );                //send the userProfilePic to MainActivity
                 startActivity(intent);
+            }
+        });
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Post post1 = lv.getItemAtPosition(position);
+                Intent intent = new Intent(UserPage.this, DecisionActivity.class);
+                intent.putExtra("PostObject", (Post) lv.getItemAtPosition(position));
+                intent.putExtra("objectId", ((Post) lv.getItemAtPosition(position)).getObjectId().toString());
+
+                Log.d("object being Passed:", lv.getItemAtPosition(position).toString());
+                startActivity(intent);
+            }
+        });
+
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                new AlertDialog.Builder(UserPage.this)
+                        .setTitle("Delete Your Post!!")
+                        .setMessage("Are You Sure You Want To Delete Your Post?")
+                        .setCancelable(true)
+                        .setNegativeButton("cancel", new DialogInterface.OnClickListener(){
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //do nothing
+                            }
+                        })
+                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ((Post) lv.getItemAtPosition(position)).deleteInBackground(new DeleteCallback() {
+                                    @Override
+                                    public void done(ParseException e) {
+                                        if (e == null){
+                                            Toast.makeText(UserPage.this,
+                                                    "Successful Delete",
+                                                    Toast.LENGTH_SHORT).show();
+                                            finish();
+                                            startActivity(getIntent());
+                                        }else{
+                                            Toast.makeText(UserPage.this,
+                                                    "Cannot Delete",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            }
+                        }).create().show();
+                return true;
             }
         });
 /**
@@ -389,11 +445,12 @@ lv.setAdapter(listAdapter);
 
         // Handle item selection
         switch (item.getItemId()) {
-            /**
-            case R.id.action_main:
-                startActivity(new Intent(UserPage.this, MainActivity.class));
+
+            case R.id.action_refresh:
+                finish();
+                startActivity(getIntent());
                 return true;
-             **/
+
             case R.id.action_settings:
                 return true;
             default:

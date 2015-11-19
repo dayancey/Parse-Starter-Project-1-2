@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1D8D77">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="35sp"
+        android:text="\n Welcome to Waffle!"
+        android:gravity="center"
+        android:id="@+id/textView1"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffffff" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="\n Here's how you can get started:"
+        android:id="@+id/textView2"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffffff" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="\n 1. Visit your user page and upload a profile pic \n 2. Scroll through some posts \n 3. Vote for your favorites \n 4. And don't forget to comment your thoughts \n 5. Hit the + to upload your own post \n 6. Write a unique description \n 7. Press Submit \n 8. Check the post's status on your user page \n 9. Keep on Wafflin'"
+        android:id="@+id/textView3"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffffff" />
+</LinearLayout>

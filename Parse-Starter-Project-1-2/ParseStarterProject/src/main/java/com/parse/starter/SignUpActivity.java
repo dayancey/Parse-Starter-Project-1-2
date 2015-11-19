@@ -30,6 +30,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText usernameEditText;
     EditText passwordEditText;
     EditText passwordAgainEditText;
+    EditText emailEditText;
     String email;
     byte[] profilePic;
     ParseFile file;
@@ -38,12 +39,14 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        getSupportActionBar().hide();
 
         // Set up the signup form.
         usernameEditText = (EditText) findViewById(R.id.usernameSignupEdt);
 
         passwordEditText = (EditText) findViewById(R.id.passwordSignupEdt);
         passwordAgainEditText = (EditText) findViewById(R.id.password_again_edit_text);
+        emailEditText = (EditText) findViewById(R.id.email_edit_text);
 
         username = (String) getIntent().getSerializableExtra("userName");
         password = (String) getIntent().getSerializableExtra("password");
@@ -51,7 +54,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         usernameEditText.setText(username);
         passwordEditText.setText(password);
-
+        emailEditText.setText(email);
 
                 // Set up the submit button click handler
         Button mActionButton = (Button) findViewById(R.id.signupBtt);
@@ -73,6 +76,14 @@ public class SignUpActivity extends AppCompatActivity {
         if (username.length() == 0) {
             validationError = true;
             validationErrorMessage.append(getString(R.string.error_blank_username));
+        }
+        if (email.length() == 0){
+            if (validationError){
+                validationErrorMessage.append("can not join");
+            }
+            validationError = true;
+            validationErrorMessage.append("Enter email");
+
         }
         if (password.length() == 0) {
             if (validationError) {
